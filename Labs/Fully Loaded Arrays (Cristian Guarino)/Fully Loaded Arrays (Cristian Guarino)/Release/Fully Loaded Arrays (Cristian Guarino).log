@@ -1,0 +1,8 @@
+﻿  Fully Loaded Arrays (Cristian Guarino).cpp
+Fully Loaded Arrays (Cristian Guarino).cpp(70): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating code
+  1 of 17 functions ( 5.9%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    8 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Fully Loaded Arrays (Cristian Guarino).vcxproj -> C:\Users\guari\OneDrive\CIT-120\Labs\Fully Loaded Arrays (Cristian Guarino)\Release\Fully Loaded Arrays (Cristian Guarino).exe

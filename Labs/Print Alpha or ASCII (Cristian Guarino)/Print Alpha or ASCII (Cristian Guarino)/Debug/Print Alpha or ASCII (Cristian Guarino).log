@@ -1,0 +1,5 @@
+﻿  PrintAlphaorASCIICristianGuarino.cpp
+c:\users\guari\onedrive\cit-120\labs\print alpha or ascii (cristian guarino)\print alpha or ascii (cristian guarino)\printalphaorasciicristianguarino.cpp(37): warning C4305: '=': truncation from 'int' to 'char'
+c:\users\guari\onedrive\cit-120\labs\print alpha or ascii (cristian guarino)\print alpha or ascii (cristian guarino)\printalphaorasciicristianguarino.cpp(37): warning C4309: '=': truncation of constant value
+  Print Alpha or ASCII (Cristian Guarino).vcxproj -> C:\Users\guari\OneDrive\CIT-120\Labs\Print Alpha or ASCII (Cristian Guarino)\Debug\Print Alpha or ASCII (Cristian Guarino).exe
+  Print Alpha or ASCII (Cristian Guarino).vcxproj -> C:\Users\guari\OneDrive\CIT-120\Labs\Print Alpha or ASCII (Cristian Guarino)\Debug\Print Alpha or ASCII (Cristian Guarino).pdb (Partial PDB)

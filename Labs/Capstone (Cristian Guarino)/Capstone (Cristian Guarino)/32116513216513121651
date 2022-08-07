@@ -1,0 +1,34 @@
+	651132165131216513216
+
+This program prints :
+	"Flop" if a number is divisible by 5
+	"Flip" if a number is divisible by 3 and
+	"Flip Flop" if divisible by BOTH 3 and 5
+	Nothing if divisibe by NEITHER
+
+	
+	Debugging couts in printResults function: 
+	The int value of the last digit in "number"
+		(here call the corresponding function) is 6.
+	The sum of digits in "number" 
+		(here call the corresponding function) is 62.
+
+	*****************************************
+
+	513116513216213216
+
+This program prints :
+	"Flop" if a number is divisible by 5
+	"Flip" if a number is divisible by 3 and
+	"Flip Flop" if divisible by BOTH 3 and 5
+	Nothing if divisibe by NEITHER
+
+	
+	Debugging couts in printResults function: 
+	The int value of the last digit in "number"
+		(here call the corresponding function) is 6.
+	The sum of digits in "number" 
+		(here call the corresponding function) is 50.
+
+	*****************************************
+

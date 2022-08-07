@@ -1,0 +1,282 @@
+//  Description: Program describes payment packages and outputs monthly fee based on user inputs;
+//        Title: Music Store Lab;
+//Programmed by: Cristian Guarino, Joshua Genereux, Matthew Burckardt;
+//Last modified: 10/10/17
+
+
+#include <iostream>
+//iomanip necesary for setprecision and fixed
+#include <iomanip>
+using namespace std;
+
+int main() {
+
+
+	//SETUP SECTION		SETUP SECTION		SETUP SECTION		SETUP SECTION		SETUP SECTION		SETUP SECTION		
+
+	//Custom color and title
+	system("color 70");
+	system("title Switch case lab (Team Green HB01: Cristian Guarino, Joshua Genereux, Matthew Burckardt)");
+
+
+	//Format #s to print with exactly two digits after the decimal place.
+	//This is ideal for displaying currency values (e.g. $9999.99).
+	//Placed towards top of program for transparency.
+	cout << setprecision(2) << fixed;
+
+	//===================================================================================================================|
+	//BEGIN	CONSTANTS	CONSTANTS	CONSTANTS	CONSTANTS	CONSTANTS	CONSTANTS	CONSTANTS	CONSTANTS	CONSTANTS	
+
+	/*
+	The following layout might not make for the DRYest code, but
+	its a lot easier to read than if we segregated the double and integer constants.
+	Funny thing though: with this setup, we're basically building psuedo-objects.
+	*/
+
+	//==============================================================
+
+	//Package A details
+	const double
+		A_MONTHLY = 4.99,
+		A_EXTRA_SONGS = 0.99;
+	const int
+		A_FREE_SONGS = 10;
+
+	//==============================================================
+
+	//Package B details
+	const double
+		B_MONTHLY = 9.99,
+		B_EXTRA_SONGS = 0.59;
+	const int
+		B_FREE_SONGS = 20;
+
+	//==============================================================
+
+	//Package C details
+	const double
+		C_MONTHLY = 14.99,
+		C_EXTRA_SONGS = 0.29;
+	const int
+		C_FREE_SONGS = 30;
+
+	//==============================================================
+
+	//Current tax rate, converted from %.
+	const double
+		TAX = 0.06; //Current tax rate, converted from %.
+
+
+	//==============================================================
+
+	//END CONSTANTS		CONSTANTS		CONSTANTS		CONSTANTS		CONSTANTS		CONSTANTS		CONSTANTS		
+	//===================================================================================================================|
+
+	//===================================================================================================================|
+	//BEGIN VARIABLES	VARIABLES	VARIABLES	VARIABLES	VARIABLES	VARIABLES	VARIABLES	VARIABLES	VARIABLES
+	
+
+	//Boolean for plurality (i.e. song vs songs)
+	bool plural;
+
+	//User input variables will be prefixed "user" for clarity and easy auto-complete.
+	//Other than user_free_songs and user_package, none of them are STRICTLY necessary, but they make the code much easier to understand.
+	char 
+		user_package; //User's package. Character variable assigned by user via cin.
+	int
+		user_free_songs;	//User's free songs per month. Assigned by constant via switch(user_package)
+	double
+		user_songs,			//User's songs this month. Assigned by user via cin. Defined as a double so non-integers can be flagged.
+		user_monthly,		//User's base rate per month. Assigned by constant via switch(user_package)
+		user_extra_songs;	//User's rate per extra song. Assigned by constant via switch(user_package)
+
+	//Calculation variables. There values must be assigned later because they are co-dependent.
+	double
+		extraCharge,//Extra charge IF (user_songs > user_free_songs). Set conditonal to avoid errant discount.
+		subtotal,	//Monthly expense before tax. (user_monthly+extraCharge)
+		taxCharge,	//Applicable tax charge (subtotal * taxRate)
+		taxRate,	//Double variable for applicable tax rate. Currently always = TAX.
+		total;		//Subtotal + taxCharge.
+
+
+	//END VARIABLES		VARIABLES		VARIABLES		VARIABLES		VARIABLES		VARIABLES		VARIABLES		
+	//===================================================================================================================|
+	//INPUT SECTION		INPUT SECTION		INPUT SECTION		INPUT SECTION		INPUT SECTION		INPUT SECTION		
+
+
+	//BANNER
+	cout
+		<< "\n\t\t                   Switch Case GROUP Lab                  "
+		<< "\n\t\t                    On line music store                   "
+		<< "\n\t\t         also needs nested if ... else statements         "
+		<< "\n\t\t               and the conditional operator               "
+		<< "\n\t\t       and the use of \"continue\" in one place ONLY      "
+		<< "\n\t\t                    by Team Green HB01                    "
+		<< "\n\t\t                    -Cristian Guarino-                    "
+		<< "\n\t\t                    -Joshua Genereux-                     "
+		<< "\n\t\t                   -Matthew Burckardt-                   "
+		<< "\n\n\n";
+
+
+	//BEGIN INFINITE LOOP FOR EASE OF TESTING
+	//CURRENT CONTINUE(S) WITHIN THIS LOOP: 1
+	while (true) {
+
+
+		//COUT package details || Utilize constants where appropriate.
+		cout <<
+			"Here are the monthly subscriptions we have available:\n"
+			"   Package A: Monthly fee $" << setw(5) << A_MONTHLY << ". " << A_FREE_SONGS << " free songs and $" << A_EXTRA_SONGS << " per song after that.      \n"
+			"   Package B: Monthly fee $" << setw(5) << B_MONTHLY << ". " << B_FREE_SONGS << " free songs and $" << B_EXTRA_SONGS << " per song after that.      \n"
+			"   Package C: Monthly fee $" << setw(5) << C_MONTHLY << ". " << C_FREE_SONGS << " free songs and $" << C_EXTRA_SONGS << " per song after that.      \n"
+			<< endl; //end cout
+
+					 //=======================ASSESS CURRENT PACKAGE DETAILS=============================
+
+					 //Prompt user_package
+		cout << "Please select your current package: ";
+		cin >> user_package;
+		//Ignore excess input
+		cin.ignore(1337, '\n');
+		//Indent
+		cout << "\n";
+
+		//Validate user_package via SWITCH (REQUIRED by assignment parameters)
+		//Allow for user input of either lowercase OR UPPERCASE.
+		//ASSIGN selected package values to user values.
+		switch (user_package) {
+		case 'a':
+			//Allow fallthrough
+		case 'A':
+			user_monthly = A_MONTHLY;
+			user_free_songs = A_FREE_SONGS;
+			user_extra_songs = A_EXTRA_SONGS;
+			break;
+		case 'b':
+			//Allow fallthrough
+		case 'B':
+			user_monthly = B_MONTHLY;
+			user_free_songs = B_FREE_SONGS;
+			user_extra_songs = B_EXTRA_SONGS;
+			break;
+		case 'c':
+			//Allow fallthrough
+		case 'C':
+			user_monthly = C_MONTHLY;
+			user_free_songs = C_FREE_SONGS;
+			user_extra_songs = C_EXTRA_SONGS;
+			break;
+		default:
+			cout << "Sorry, that is not a valid package.\n";
+			system("pause");
+			cout << "\n\t***************************************************\n\n";
+			continue; // CONTINUE	CONTINUE	CONTINUE	CONTINUE	CONTINUE	CONTINUE	CONTINUE	CONTINUE	CONTINUE	
+		} //END switch(user_package)
+
+
+		  //================================ASSESS SONGS (user_songs) DOWNLOADED THIS MONTH============================
+
+
+		  //Prompt user_songs
+		cout << "How many songs did you download this month? ";
+		cin >> user_songs;
+		//Ignore junk input
+		cin.ignore(1337, '\n');
+		//Indent
+		cout << endl;
+
+		//===================================VALIDATE user_songs INPUT==================================
+
+		//We must now make sure user_songs is NOT a negative number AND NOT a non-integer.
+		//TEST if user_songs is negative.
+		if ((user_songs < 0))
+			cout << "\t*** Number of songs downloaded cannot be negative!\n\n\n"; //Iteration ends.
+																			//TEST if user_songs is a non-integer.
+		else if (user_songs != static_cast<int>(user_songs))
+			cout << "\t*** Number of songs downloaded must be an integer!\n\n\n";
+		//VALIDATED INPUT, PLEASE PROCEED:
+		else
+		{
+			//===================================================BEGIN===================================================================
+			//PROCESSING SECTION	PROCESSING SECTION		PROCESSING SECTION		PROCESSING SECTION		PROCESSING SECTION		
+
+
+			//Extra charge assignment.
+			// extraCharge = (user_songs > user_free_songs ? (user_extra_songs * (user_songs - user_free_songs) ) : 0);
+			if (user_songs > user_free_songs)
+				extraCharge = (user_extra_songs * (user_songs - user_free_songs));
+			else
+				extraCharge = 0;
+
+
+			//Calculate subtotal
+			subtotal = user_monthly + extraCharge;
+
+
+			//Tax calculation.
+			//taxRate currently always = TAX, but this may be changed to allow for varying tax rates (e.g. between states).
+			taxRate = TAX;
+			taxCharge = subtotal*taxRate;
+
+			total = subtotal + taxCharge;
+
+			//Assess plural: 
+			//Was there more than one extra song?
+			((user_songs - user_free_songs) > 1) ? plural = 1 : plural = 0;
+
+			//============================================================BEGIN==================================================================|
+			//OUTPUT SECTION	OUTPUT SECTION		OUTPUT SECTION		OUTPUT SECTION		OUTPUT SECTION		OUTPUT SECTION		
+			//
+
+			//begin===========================  BILL TOTAL ======== BILL TOTAL ==============================================|
+
+			cout
+				// "Your total bill this month is subtotal + tax (for tax) = total"
+				<< "Your total bill this month is " << subtotal << " + " << taxCharge << " (for tax) = " << total << endl;
+
+			//end=============================  BILL TOTAL ======== BILL TOTAL ==============================================|
+
+
+
+			//begin===========================  EXTRA TOTAL ======= EXTRA TOTAL =============================================|
+
+			//IF extra song(s), explain extraCharge:
+			if (user_songs > user_free_songs) {
+				cout //You have an extra charge of $### for # extra song(s) over your monthly limit of #.
+					<< "\tYou have an extra charge of $"
+					<< extraCharge
+					<< " for " << static_cast<int>(user_songs - user_free_songs) //Recall that user_songs is a double and must be static_cast to ignore decimals. Set precision(2) also mandates this line.
+					<< " extra song";
+				//Pluralize if more than one extra song
+				//Couts "s" if plural or nothing if not plural.
+				cout << (plural ? "s" : "");
+				//=====================================|
+				cout
+					<< "\n\tover your monthly limit of "
+					<< user_free_songs << "."
+					<< "\n";
+
+			}//END if (user_songs > user_free_songs)
+
+			 //end=============================  EXTRA TOTAL ======== EXTRA TOTAL ============================================|
+		}//end ELSE condition (user_songs != non-integer && user_songs != negative)
+
+
+		
+
+		//END PAUSE, INDENT, and SEPARATE via line
+		system("pause");
+		cout << "\n\t***************************************************\n\n";
+
+
+
+
+
+	} //END while(true) [Infinite testing loop]
+
+
+
+	  //CLEANUP SECTION	CLEANUP SECTION		CLEANUP SECTION		CLEANUP SECTION		CLEANUP SECTION		CLEANUP SECTION		
+	return 0;
+
+}//END main()

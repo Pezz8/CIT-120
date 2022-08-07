@@ -1,0 +1,4 @@
+﻿  PrimeNumbersFunction.cpp
+c:\users\guari\onedrive\cit-120\exercises\prime numbers function\prime numbers function\primenumbersfunction.cpp(28): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  Prime Numbers Function.vcxproj -> C:\Users\guari\OneDrive\CIT-120\Exercises\Prime Numbers Function\Debug\Prime Numbers Function.exe
+  Prime Numbers Function.vcxproj -> C:\Users\guari\OneDrive\CIT-120\Exercises\Prime Numbers Function\Debug\Prime Numbers Function.pdb (Partial PDB)

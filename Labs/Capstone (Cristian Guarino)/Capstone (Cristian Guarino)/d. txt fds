@@ -1,0 +1,52 @@
+
+	                           Flip Flop                             
+	   for VERY Large Numbers that would overflow any type of int    
+	            accepts signs at the beginning of the num            
+	                        Sample Solution                          
+	                        Using Functions                          
+	                      by Cristian Guarino                  
+
+
+
+This program prints :
+	"Flop" if a number is divisible by 5
+	"Flip" if a number is divisible by 3 and
+	"Flip Flop" if divisible by BOTH 3 and 5
+	Nothing if divisibe by NEITHER
+
+	Your number was 990
+
+	Flip Flop 
+
+	Debugging couts in printResults function: 
+	The int value of the last digit in "number"
+		(here call the corresponding function) is 0.
+	The sum of digits in "number" 
+		(here call the corresponding function) is 18.
+
+	*****************************************
+
+	Your number was 55
+
+	Flop 
+
+	Debugging couts in printResults function: 
+	The int value of the last digit in "number"
+		(here call the corresponding function) is 5.
+	The sum of digits in "number" 
+		(here call the corresponding function) is 10.
+
+	*****************************************
+
+	Your number was 99
+
+	Flip 
+
+	Debugging couts in printResults function: 
+	The int value of the last digit in "number"
+		(here call the corresponding function) is 9.
+	The sum of digits in "number" 
+		(here call the corresponding function) is 18.
+
+	*****************************************
+

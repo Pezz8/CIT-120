@@ -1,0 +1,236 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+// THE CODE THAT IS COMMENTED OUT IS THE CODE THAT I HAD BEFORE MY CHANGES
+//void triangleArea();
+//void rectangleArea();
+//void circleArea();
+void printBanner();
+void handleChoice(char choice);
+void mySwap(double &sideX, double &sideY);
+void rearrange(double &sideX, double &sideY, double &sideZ);
+bool isTriangle(double sideX, double sideY, double sideZ);
+double calcArea(double radius);
+double calcArea(double length, double width);
+double calcArea(double sideX, double sideY, double sideZ);
+double getPositiveNumber();
+char getChoice();
+
+double PI = 3.141592654;
+
+int main()
+{
+
+	system("color 02");
+	system("title Fuction Design Overloading (Cristian Guarino)");
+
+	cout << fixed << setprecision(6) << endl;
+
+	double sideX, sideY, sideZ;
+	double length, width;
+	double radius;
+	char choice;
+
+	printBanner();
+
+	while (true)
+	{
+
+		cout << "\nDo you want to start the program? ";
+
+		choice = getChoice();
+		handleChoice(choice);
+
+		//circleArea();
+
+		cout << "\nGive me the radius of the circle: ";
+		radius = getPositiveNumber();
+		cout << "\tThe Area of the circle is " << calcArea(radius) << endl << endl;
+
+		//rectangleArea();
+
+		cout << "Give me the leght of the rectangle: ";
+		length = getPositiveNumber();
+		cout << "...and the width: ";
+		width = getPositiveNumber();
+		cout << "\tThe Area of the rectangle is " << calcArea(length, width) << endl << endl;
+
+		//triangleArea();
+
+		cout
+			<< "\nGive me the lenght of the sides of a triangle."
+			<< "\nSide 1: ";
+		sideX = getPositiveNumber();
+		cout << "Side 2: ";
+		sideY = getPositiveNumber();
+		cout << "Side 3: ";
+		sideZ = getPositiveNumber();
+
+		rearrange(sideX, sideY, sideZ);
+
+		while (!isTriangle(sideX, sideY, sideZ))
+		{
+			cout
+				<< "\nThe sum of two sides of a triangle must be greater than the third side"
+				<< "\nTry Again. Side 1: ";
+			sideX = getPositiveNumber();
+			cout << "Side 2: ";
+			sideY = getPositiveNumber();
+			cout << "Side 3: ";
+			sideZ = getPositiveNumber();
+		}
+
+		cout << "\tThe Area of the triangle is: " << calcArea(sideX, sideY, sideZ) << endl << endl;
+
+		cout << "\t*********************\n";
+
+	}
+
+	system("pause");
+}
+
+void printBanner()
+{
+	cout
+		<< "\n\t\t                  Project on Designing Overloading Functions             "
+		<< "\n\t\t               Find the area of a rectangle, triangle, or circle         "
+		<< "\n\t\t     also does extensive input validation and uses by reference variables"
+		<< "\n\t\t                             By Cristian Guarino                   \n\n\n";
+}
+
+double getPositiveNumber()
+{
+	double positiveNumber;
+	cin >> positiveNumber;
+	cin.ignore(200, '\n');
+	while (positiveNumber <= 0)
+	{
+		cout << "Positive numbers only please. Try again: ";
+		cin >> positiveNumber;
+		cin.ignore(200, '\n');
+	}
+	return positiveNumber;
+}
+
+double calcArea(double radius)
+{
+	return (pow(radius, 2)*PI);
+}
+
+double calcArea(double length, double width)
+{
+	return length*width;
+}
+
+void rearrange(double &sideX, double &sideY, double &sideZ)
+{
+	if (sideX > sideY) mySwap(sideX, sideY);
+	if (sideX > sideZ) mySwap(sideX, sideZ);
+	if (sideY > sideZ) mySwap(sideY, sideZ);
+}
+
+void mySwap(double &sideX, double &sideY)
+{
+	double swapX = sideY;
+	sideY = sideX;
+	sideX = swapX;
+}
+
+bool isTriangle(double sideX, double sideY, double sideZ)
+{
+	rearrange(sideX, sideY, sideZ);
+
+	if ((sideX + sideY) > sideZ)
+		return true;
+	else
+		return false;
+}
+
+double calcArea(double sideX, double sideY, double sideZ)
+{
+	// double semiPerimeter = (sideX + sideY + sideZ) / 2;
+	return (0.25)*sqrt((sideX+sideY+sideZ)*(-sideX+sideY+sideZ)*(sideX-sideY+sideZ)*(sideX+sideY-sideZ));
+}
+
+/*
+void triangleArea()
+{
+	double sideX, sideY, sideZ;
+
+	cout
+		<< "\nGive me the lenght of the sides of a triangle."
+		<< "\nSide 1: ";
+	sideX = getPositiveNumber();
+	cout << "Side 2: ";
+	sideY = getPositiveNumber();
+	cout << "Side 3: ";
+	sideZ = getPositiveNumber();
+
+	rearrange(sideX, sideY, sideZ);
+
+	while (!isTriangle(sideX, sideY, sideZ))
+	{
+		cout
+			<< "\nThe sum of two sides of a triangle must be greater than the third side"
+			<< "\nTry Again. Side 1: ";
+		sideX = getPositiveNumber();
+		cout << "Side 2: ";
+		sideY = getPositiveNumber();
+		cout << "Side 3: ";
+		sideZ = getPositiveNumber();
+	}
+
+	cout << "The Area of the triangle is: " << calcArea(sideX, sideY, sideZ) << endl;
+
+}
+
+void rectangleArea()
+{
+	double length, width;
+
+	cout << "Give me the leght of the rectangle: ";
+	length = getPositiveNumber();
+	cout << "Give me the width of the rectangle: ";
+	width = getPositiveNumber();
+	cout << "\tThe Area of the rectangle is " << calcArea(length, width) << endl << endl;
+}
+
+void circleArea()
+{
+	double radius;
+
+	cout << "Give me the radius of the circle: ";
+	radius = getPositiveNumber();
+	cout << "\tThe Area of the circle is " << calcArea(radius) << endl << endl;
+}
+
+*/
+
+char getChoice()
+{
+	char a;
+
+	cin >> a;
+	cin.ignore(200, '\n');
+
+	while (!(a == 'Y' || a == 'y' || a == 'n' || a == 'N'))
+	{
+		cout << "Please type only Y or N: ";
+		cin >> a;
+		cin.ignore(200, '\n');
+	}
+
+	return a;
+}
+
+void handleChoice(char choice)
+{
+	if (choice == 'n' || choice == 'N')
+	{
+		cout << "\nDon't you love Geometry?\n\n";
+		system("pause");
+		return exit(0);
+	}
+}
